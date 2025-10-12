@@ -7,7 +7,7 @@ WIP - A core library for development of games and tools.
 
 ### Development Environment - Linux - Install a Compiler
 
-Install `libc-dev`, `gcc`, `g++`, `make` and `dpkg-dev`. Usually this can be
+Install `libc-dev`, `gcc`, `g++`, and `make`. Usually this can be
 done with one installation command from most package managers like so:
 
 *Pacman (Arch based distros):*
@@ -43,36 +43,34 @@ $ meson compile
 $ meson test
 ```
 
-## Development Environment - Linux - Install a Debugger
+## Development Environment - Linux - IDE Selection
 
-Install GDB:
+### Recommended Options
 
-*Pacman (Arch based distros):*
-```sh
-# pacman -S gdb
-```
+* Use [CLion](https://www.jetbrains.com/clion/)
+* Use [Sublime Debugger](https://packagecontrol.io/packages/Debugger).
 
-*Apt (Debian based distros):*
-```sh
-# apt install gdb
-```
+## Development Environment - Build configs
 
-# Typical Workflow
-
-## Typical Workflow - Compile and Test
-
-Assuming you've setup your build directory (see: the Installing Meson section)
-You can run meson build and test commands from the build directory.
+The supported build configs are: `[debug, debugoptimized, release]`
 
 ```sh
+$ meson setup meson-build-debug --buildtype=debug
+$ cd meson-build-debug
 $ meson compile
 $ meson test
 ```
 
-## Typical Workflow - Debugging
+```sh
+$ meson setup meson-build-debugoptimized --buildtype=debugoptimized
+$ cd meson-build-debugoptimized
+$ meson compile
+$ meson test
+```
 
-There is a Sublime Text project file in the workspace root with debug commands.
-
-This requires the
-[Sublime Debugger](https://packagecontrol.io/packages/Debugger) package to be
-installed and configured.
+```sh
+$ meson setup meson-build-release --buildtype=release
+$ cd meson-build-release
+$ meson compile
+$ meson test
+```
