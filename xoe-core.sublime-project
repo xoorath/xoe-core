@@ -1,0 +1,40 @@
+{
+	"folders":
+	[
+		{
+			"path": ".",
+			"folder_exclude_patterns": [
+				".git",
+				"build"
+			],
+		}
+	],
+	"settings":
+    {
+        "tab_size": 4,
+    },
+    "build_systems":
+    [
+    	{
+    		"name": "meson compile",
+    		"shell_cmd": "meson compile",
+    		"working_dir": "$project_path/build"
+    	},
+    	{
+    		"name": "meson test",
+    		"shell_cmd": "meson test",
+    		"working_dir": "$project_path/build"
+    	}
+	],
+	"debugger_configurations":
+	[
+		{
+			"type": "gdb",
+			"request": "launch",
+			"name": "Launch Program",
+			"target": "./build/xoe-core-demo/xoe-core-demo",
+			"cwd": "${folder}",
+			"valuesFormatting": "parseText"
+		},
+	],
+}
