@@ -24,4 +24,11 @@ using ssize_t   = int64_t;
 using ptrdiff_t = int64_t;
 
 using float32_t = float;
+
+//------------------------------------------------------------------------------
+namespace xoe
+{
+    void CopyBytes(byte_t const* dest, byte_t const* src, uint32_t len);
+}  // namespace xoe
+
 //------------------------------------------------------------------------------

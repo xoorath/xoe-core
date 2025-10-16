@@ -1,4 +1,5 @@
 # xoe-core
+
 WIP - A core library for development of games and tools.
 
 # Development Environment
@@ -7,31 +8,31 @@ WIP - A core library for development of games and tools.
 
 ### Development Environment - Linux - Install a Compiler
 
-Install `libc-dev`, `gcc`, `g++`, and `make`. Usually this can be
-done with one installation command from most package managers like so:
-
 *Pacman (Arch based distros):*
+
 ```sh
-# pacman -S base-devel
+# pacman -Sy clang
 ```
 
 *Apt (Debian based distros):*
-```sh
-# apt install build-essential
-```
 
-These meta packages aren't exactly equivalent but both will get you what you
-need.
+```sh
+# apt update 
+# apt install clang
+```
 
 ### Development Environment - Linux - Install Meson
 
 Install [Meson](https://mesonbuild.com/Quick-guide.html)
 
+Note: Meson doesn't (yet?) allow you to specify a compiler but it will utilize the environment
+variables CC and CXX to determine the c and cpp compiler to use. Only clang is supported at the time of writing.
+
 Once you've installed meson and have a compiler you can setup your build
 directory. From the project root in a terminal run:
 
 ```sh
-$ meson setup build
+$ meson setup buildDir
 ```
 
 This will create your build directory. All other commands will be run from

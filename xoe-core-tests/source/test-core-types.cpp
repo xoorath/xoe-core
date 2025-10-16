@@ -1,7 +1,7 @@
 // copyright xo 2025 all rights reserved
 //------------------------------------------------------------------------------
 
-#include <xoe-core/core-types.hpp>
+#include <xoe-core/BasicTypes.hpp>
 
 #include "gtest/gtest.h"
 

@@ -1,7 +1,32 @@
-#include <xoe-core/core-types.hpp>
-#include <iostream>
 
-int main() {
+#include <iostream>
+#include <xoe-core/BasicTypes.hpp>
+#include <xoe-core/Init.hpp>
+
+#include <spdlog/spdlog.h>
+
+int main()
+{
+    xoe::InitSpdlog const iniSpdlog;
+    if (!iniSpdlog.IsInitialized())
+    {
+        std::cerr << "Failed to initialize highway.\n"
+                  << iniSpdlog.GetErrorMessage().Get() << std::endl;
+        return -1;
+    }
+    (void)iniSpdlog;
+
+    spdlog::info("wazzzzup");
+
+    xoe::InitHighway const initHighway;
+    if (!initHighway.IsInitialized())
+    {
+        std::cerr << "Failed to initialize highway.\n"
+                  << initHighway.GetErrorMessage().Get() << std::endl;
+        return -1;
+    }
+    (void)initHighway;
+
     std::cout << "xoe build environment:\n";
 
 #if defined(XOE_HOST_ARCH_X86_64)
@@ -65,6 +90,8 @@ int main() {
 #endif
 
     std::cout.flush();
+
+    xoe::InitHighway();
 
     return 0;
 }
