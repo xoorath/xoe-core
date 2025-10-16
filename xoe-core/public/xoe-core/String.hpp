@@ -6,6 +6,7 @@
 //------------------------------------------------------------------------------
 
 // xoe
+#include <xoe-core-impl/constexpr-xxh3.h>
 #include <xoe-core/BasicTypes.hpp>
 
 // standard library
@@ -13,8 +14,37 @@
 #include <cstdlib>
 #include <format>
 
+//------------------------------------------------------------------------------
 namespace xoe
 {
+    //--------------------------------------------------------------------------
+    namespace immediate
+    {
+        //----------------------------------------------------------------------
+        // Gets the length of a string at compile time
+        template <size_t N>
+        consteval uint32_t StrLen(char_t const (&str)[N]) noexcept
+        {
+            uint32_t len = 0;
+            while ((str[len] != '\0') && (len < N - 1))
+            {
+                ++len;
+            }
+            return len;
+        }
+
+        //----------------------------------------------------------------------
+        // Gets the xxhash of a string at compile time
+        template <size_t N>
+        consteval hash64_t StrHash(char_t const (&str)[N]) noexcept
+        {
+            if (StrLen(str) == 0)
+                return 0;
+            return static_cast<hash64_t>(
+                constexpr_xxh3::XXH3_64bits_const<char_t>(str, StrLen(str)));
+        }
+    }  // namespace immediate
+
     //--------------------------------------------------------------------------
     // Gets the length of a string
     uint32_t StrLen(char_t const* str);
@@ -45,10 +75,11 @@ namespace xoe
         [[nodiscard]] uint32_t GetLength() const { return m_Length; }
         [[nodiscard]] uint32_t GetCapacity() const { return m_Capacity; }
         [[nodiscard]] bool IsEmpty() const { return m_Length == 0; }
-        void Clear(bool andFreeMemory = false);
 
+        void Clear(bool andFreeMemory = false);
         void Reserve(uint32_t capacity);
         void SetLength(uint32_t newLength);
+        hash64_t ComputeHash() const;
 
         String operator+(char_t const* other) const;
         String operator+(String const& other) const;
@@ -80,8 +111,8 @@ namespace xoe
                 }
                 else
                 {
-                    m_Str = new char_t[](nextCapacity);
-                    m_ShouldFree == FreeStringMemory::Free;
+                    m_Str        = new char_t[nextCapacity];
+                    m_ShouldFree = FreeStringMemory::Free;
                 }
             }
             m_Length = len;

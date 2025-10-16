@@ -118,5 +118,19 @@ namespace
         }
     }
 
+    TEST(String, XXH3)
+    {
+        GTEST_ASSERT_EQ(xoe::immediate::StrHash(""), 0);
+        // compared with https://md5calc.com/hash/xxh3/Hello+World
+        GTEST_ASSERT_EQ(xoe::immediate::StrHash("Hello World"),
+                        0xe34615aade2e6333);
+        GTEST_ASSERT_EQ(xoe::immediate::StrHash(
+                            "Hello World\0Some more text after the string"),
+                        0xe34615aade2e6333);
+
+        xoe::String dynamicHelloWorld("Hello World");
+        GTEST_ASSERT_EQ(dynamicHelloWorld.ComputeHash(), 0xe34615aade2e6333);
+    }
+
 }  // namespace
 //------------------------------------------------------------------------------

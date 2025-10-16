@@ -7,6 +7,7 @@
 
 // third party
 #include <hwy/highway.h>
+#include <xxhash.h>
 
 // standard
 #include <cstring>
@@ -47,7 +48,7 @@ namespace xoe
     //--------------------------------------------------------------------------
     uint32_t StrLen(char const* str)
     {
-        // hwy::CopyBytes()
+        return static_cast<uint32_t>(strlen(str));
     }
 
     // String methods
@@ -168,6 +169,56 @@ namespace xoe
                 m_Str[0] = '\0';
             }
         }
+    }
+
+    void String::Reserve(uint32_t capacity) {}
+    void String::SetLength(uint32_t newLength) {}
+
+    hash64_t String::ComputeHash() const
+    {
+        if (m_Length == 0)
+        {
+            return 0;
+        }
+        return static_cast<hash64_t>(
+            XXH3_64bits(m_Str, static_cast<size_t>(m_Length)));
+    }
+
+    String String::operator+(char_t const* other) const
+    {
+        return String();
+    }
+
+    String String::operator+(String const& other) const
+    {
+        return String();
+    }
+
+    String& String::operator+=(char_t const* other)
+    {
+        return *this;
+    }
+
+    String& String::operator+=(String const& other)
+    {
+        return *this;
+    }
+
+    bool String::operator==(char_t const* other) const
+    {
+        return false;
+    }
+    bool String::operator!=(char_t const* other) const
+    {
+        return false;
+    }
+    bool String::operator==(String const& other) const
+    {
+        return false;
+    }
+    bool String::operator!=(String const& other) const
+    {
+        return false;
     }
 
 }  // namespace xoe

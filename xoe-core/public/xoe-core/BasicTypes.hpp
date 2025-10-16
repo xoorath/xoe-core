@@ -24,6 +24,7 @@ using ssize_t   = int64_t;
 using ptrdiff_t = int64_t;
 
 using float32_t = float;
+using hash64_t  = uint64_t;
 
 //------------------------------------------------------------------------------
 namespace xoe

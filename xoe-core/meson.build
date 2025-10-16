@@ -18,9 +18,13 @@ hwy_dep = hwy_proj.get_variable('hwy_dep')
 spdlog_proj = subproject('spdlog')
 spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 
+xxhash_proj = subproject('xxhash')
+xxhash_dep = xxhash_proj.get_variable('xxhash_dep')
+
 xoe_core_lib_deps = [
     hwy_dep,
-    spdlog_dep
+    spdlog_dep,
+    xxhash_dep
 ]
 
 xoe_core_lib = library('xoe-core-lib',
